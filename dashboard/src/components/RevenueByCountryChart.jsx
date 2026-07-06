@@ -12,7 +12,7 @@ function RevenueByCountryChart() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" tickFormatter={(value) => value.toLocaleString()} />
                     <YAxis type="category" dataKey="Country" width={100} />
-                    <Tooltip />
+                    <Tooltip formatter={(value) => value.toLocaleString()} />
                     <Bar dataKey="Revenue" fill="#3b82f6" />
                 </BarChart>
             </ResponsiveContainer>
@@ -23,7 +23,7 @@ function RevenueByCountryChart() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" tickFormatter={(value) => value.toLocaleString()} />
                     <YAxis type="category" dataKey="Country" width={100} />
-                    <Tooltip />
+                    <Tooltip formatter={(value) => value.toLocaleString()} />
                     <Bar dataKey="Revenue" fill="#f97316" />
                 </BarChart>
             </ResponsiveContainer>

@@ -10,7 +10,7 @@ function TopProductsChart() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" tickFormatter={(value) => value.toLocaleString()} />
                     <YAxis type="category" dataKey="Product" width={220} />
-                    <Tooltip />
+                    <Tooltip formatter={(value) => value.toLocaleString()} />
                     <Bar dataKey="Revenue" fill="#3b82f6" />
                 </BarChart>
             </ResponsiveContainer>
