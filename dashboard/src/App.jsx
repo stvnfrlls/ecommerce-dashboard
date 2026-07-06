@@ -16,28 +16,30 @@ function App() {
         Analysis of 800,000+ transactions from a UK-based online retailer (2010), covering revenue trends,
         top products, customer purchasing patterns, and geographic sales distribution.
       </p>
-      <div className="dashboard-grid">
+      <main>
         <Suspense fallback={<div>Loading...</div>}>
           <SummaryStats />
         </Suspense>
-        <Suspense fallback={<div>Loading...</div>}>
-          <MonthlyRevenueChart />
-        </Suspense>
-        <div className="dashboard-grid-2col">
+        <div className="dashboard-grid">
           <Suspense fallback={<div>Loading...</div>}>
-            <TopProductsChart />
+            <MonthlyRevenueChart />
           </Suspense>
-          <Suspense fallback={<div>Loading...</div>}>
-            <RevenueByCountryChart />
-          </Suspense>
-          <Suspense fallback={<div>Loading...</div>}>
-            <TopCustomersChart />
-          </Suspense>
-          <Suspense fallback={<div>Loading...</div>}>
-            <TopInvoicesTable />
-          </Suspense>
+          <div className="dashboard-grid-2col">
+            <Suspense fallback={<div>Loading...</div>}>
+              <TopProductsChart />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+              <RevenueByCountryChart />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+              <TopCustomersChart />
+            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+              <TopInvoicesTable />
+            </Suspense>
+          </div>
         </div>
-      </div>
+      </main>
       <footer className="dashboard-footer">
         <p>
           Built by Client Steven S. Frilles —
