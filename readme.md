@@ -1,15 +1,18 @@
-# E-Commerce Sales Data Analysis
+# E-Commerce Sales Analytics Dashboard
 
-A data analysis project exploring transactional sales data from a UK-based online retailer, covering revenue trends, top-performing products, and geographic sales distribution.
+An interactive data analysis project exploring transactional sales data from a UK-based online retailer, covering revenue trends, top-performing products, customer behavior, and geographic sales distribution — cleaned with pandas and visualized in a live React dashboard.
+
+**Live dashboard:** [ecommerce-dashboard-rho-peach.vercel.app](https://ecommerce-dashboard-rho-peach.vercel.app/)
 
 ## Overview
 
-This project analyzes over 1 million transaction records to answer practical business questions:
+This project analyzes over 800,000 cleaned transaction records to answer practical business questions:
 - How does revenue trend across months?
-- Which products drive the most revenue?
+- Which products and customers drive the most value?
 - Which countries generate the most sales outside the home market?
+- How many customers are repeat buyers?
 
-The analysis moves from raw, messy transactional data to cleaned datasets and clear visualizations, with the long-term goal of powering a live interactive dashboard.
+The project covers the full pipeline: raw, messy transactional data → cleaned datasets (pandas) → aggregated KPIs → interactive dashboard (React + Recharts), deployed live.
 
 ## Dataset
 
@@ -34,37 +37,69 @@ Additional cleaning:
 - Excluded non-product line items ("Manual", "Postage") from product-level analysis
 - Standardized country naming ("Eire" → "Ireland")
 
+## Key Metrics (2010)
+
+- **Total Revenue:** £8,571,212.55
+- **Total Orders:** 18,157
+- **Total Customers:** 4,217
+- **Average Order Value:** £472.06
+- **Repeat Customer Rate:** 66.3% (2,795 repeat customers vs. 1,422 one-time buyers)
+
 ## Key Findings
 
-- **Total revenue analyzed:** ~£17.7M across cleaned transactions
 - **Seasonal trend:** Revenue climbs steadily through the year, peaking in November — consistent with pre-holiday shopping demand
 - **Top product:** "Regency Cakestand 3 Tier" was the single highest revenue-generating product
-- **Market concentration:** The UK accounts for the vast majority of revenue (~£14.6M), with Ireland, Netherlands, and Germany as the next largest markets — each far smaller in comparison
+- **Market concentration:** The UK accounts for the vast majority of revenue, with Ireland, Netherlands, and Germany as the next largest markets — each far smaller in comparison
+- **Customer loyalty:** Roughly two-thirds of customers are repeat buyers, suggesting strong retention for the core customer base
+- **Bulk orders:** A small number of customers and invoices account for disproportionately large order quantities, indicating some wholesale or bulk-buying behavior
 
-## Charts
+## Dashboard Sections
 
-- Revenue by month (year-specific view)
+- Summary stat cards (Revenue, Orders, Customers, AOV, Repeat Rate)
+- Revenue by month (2010)
 - Top 10 best-selling products by revenue
 - Revenue by country (with and without UK, to surface smaller markets)
-
-*(Screenshots to be added here once finalized)*
+- Top 10 customers by quantity purchased
+- Top 10 largest single orders (table)
 
 ## Tech Stack
 
 - **Python** — pandas, matplotlib for data cleaning and exploratory analysis
 - **Jupyter Notebook** — exploration and analysis documentation
-- *(Dashboard frontend — to be added: React / Chart.js, hosted on GitHub Pages)*
+- **React (Vite)** — dashboard frontend
+- **Recharts** — chart visualizations
+- **Vercel** — deployment/hosting
 
 ## Project Structure
 
 ```
 ecommerce-dashboard/
-├── data/                   → raw and cleaned datasets (gitignored, see Dataset section)
+├── data/                          → raw and cleaned datasets, JSON exports (raw CSVs gitignored, see Dataset section)
 ├── notebook/
-│   ├── exploration.ipynb   → initial exploration and cleaning process
-│   └── analysis.ipynb      → final analysis and chart generation
-├── src/                    → dashboard frontend (in progress)
+│   ├── exploration.ipynb          → initial exploration and cleaning process
+│   └── analysis.ipynb             → final analysis, KPI calculations, and chart generation
+├── dashboard/                     → React dashboard frontend
+│   ├── src/
+│   │   ├── components/            → individual chart/table components
+│   │   ├── data/                  → JSON data consumed by the dashboard
+│   │   ├── App.jsx
+│   │   └── App.css
+│   └── package.json
 └── README.md
+```
+
+## Running Locally
+
+**Notebook (data cleaning & analysis):**
+1. Download the dataset (see Dataset section) into `data/`
+2. Open `notebook/exploration.ipynb` or `notebook/analysis.ipynb` in Jupyter or VS Code
+3. Run cells in order to reproduce the cleaning and analysis steps
+
+**Dashboard:**
+```
+cd dashboard
+npm install
+npm run dev
 ```
 
 ## Author
