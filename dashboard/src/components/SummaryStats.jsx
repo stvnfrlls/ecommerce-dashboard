@@ -6,6 +6,7 @@ function SummaryStats() {
         { label: 'Total Orders', value: stats.totalOrders.toLocaleString() },
         { label: 'Total Customers', value: stats.totalCustomers.toLocaleString() },
         { label: 'Avg Order Value', value: `£${stats.avgOrderValue.toLocaleString()}` },
+        { label: 'Repeat Customer Rate', value: `${stats.repeatRate}%` },
     ]
 
     return (

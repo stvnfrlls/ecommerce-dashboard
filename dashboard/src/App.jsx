@@ -38,6 +38,16 @@ function App() {
           </Suspense>
         </div>
       </div>
+      <footer className="dashboard-footer">
+        <p>
+          Built by Client Steven S. Frilles —
+          <a href="https://github.com/stvnfrlls" target="_blank" rel="noopener noreferrer"> GitHub</a> ·
+          <a href="https://stvnfrlls.github.io/myPortfolio" target="_blank" rel="noopener noreferrer"> Portfolio</a>
+        </p>
+        <p className="footer-credit">
+          Dataset: <a href="https://archive.ics.uci.edu/dataset/502/online+retail+ii" target="_blank" rel="noopener noreferrer">Online Retail II</a>, UCI Machine Learning Repository
+        </p>
+      </footer>
     </div>
   )
 }

@@ -4,6 +4,7 @@ function TopInvoicesTable() {
     return (
         <div className="chart-card">
             <h2>Top 10 Largest Single Orders</h2>
+            <p className="chart-caption">The single largest individual orders by quantity, highlighting bulk-purchase behavior.</p>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                     <tr style={{ borderBottom: '2px solid #ddd', textAlign: 'left' }}>

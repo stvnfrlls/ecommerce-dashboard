@@ -5,6 +5,7 @@ function MonthlyRevenueChart() {
     return (
         <div className="chart-card">
             <h2>Revenue by Month - 2010</h2>
+            <p className="chart-caption">Total revenue generated each month, showing seasonal demand patterns.</p>
             <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={monthlyRevenue}>
                     <CartesianGrid strokeDasharray="3 3" />

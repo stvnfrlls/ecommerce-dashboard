@@ -5,6 +5,7 @@ function TopProductsChart() {
     return (
         <div className="chart-card">
             <h2>Top 10 Best-Selling Products by Revenue</h2>
+            <p className="chart-caption">Products ranked by total revenue, excluding non-product line items like postage.</p>
             <ResponsiveContainer width="100%" height={500}>
                 <BarChart data={topProducts} layout="vertical" margin={{ left: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" />

@@ -5,6 +5,7 @@ function TopCustomersChart() {
     return (
         <div className="chart-card">
             <h2>Top 10 Customers by Quantity Purchased</h2>
+            <p className="chart-caption">The customers who purchased the highest total quantity of items in 2010.</p>
             <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={topCustomers} layout="vertical" margin={{ left: 80 }}>
                     <CartesianGrid strokeDasharray="3 3" />

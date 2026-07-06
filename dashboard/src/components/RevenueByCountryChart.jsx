@@ -7,6 +7,7 @@ function RevenueByCountryChart() {
     return (
         <div className="chart-card">
             <h2>Revenue by Country (Top 10)</h2>
+            <p className="chart-caption">Revenue concentration by country, led heavily by the UK home market.</p>
             <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={revenueByCountry} layout="vertical" margin={{ left: 50 }}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -18,6 +19,7 @@ function RevenueByCountryChart() {
             </ResponsiveContainer>
 
             <h2>Revenue by Country (Excluding UK)</h2>
+            <p className="chart-caption">Same data with the UK removed, to surface the next-largest international markets.</p>
             <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={withoutUK} layout="vertical" margin={{ left: 50 }}>
                     <CartesianGrid strokeDasharray="3 3" />
