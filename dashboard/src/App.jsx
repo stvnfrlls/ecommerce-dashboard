@@ -6,6 +6,7 @@ const TopProductsChart = lazy(() => import('./components/TopProductsChart'))
 const RevenueByCountryChart = lazy(() => import('./components/RevenueByCountryChart'))
 const TopCustomersChart = lazy(() => import('./components/TopCustomersChart'))
 const TopInvoicesTable = lazy(() => import('./components/TopInvoicesTable'))
+const SummaryStats = lazy(() => import('./components/SummaryStats'))
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         top products, customer purchasing patterns, and geographic sales distribution.
       </p>
       <div className="dashboard-grid">
+        <Suspense fallback={<div>Loading...</div>}>
+          <SummaryStats />
+        </Suspense>
         <Suspense fallback={<div>Loading...</div>}>
           <MonthlyRevenueChart />
         </Suspense>
