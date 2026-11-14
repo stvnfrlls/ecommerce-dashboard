@@ -1,30 +1,24 @@
 import qtyPerInvoice from '../data/qty_per_invoice.json'
+import { formatNumber } from '../utils/format'
 
 function TopInvoicesTable() {
-    return (
-        <div className="chart-card">
-            <h2>Top 10 Largest Single Orders</h2>
-            <p className="chart-caption">The single largest individual orders by quantity, highlighting bulk-purchase behavior.</p>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                    <tr style={{ borderBottom: '2px solid #ddd', textAlign: 'left' }}>
-                        <th style={{ padding: '8px' }}>Customer ID</th>
-                        <th style={{ padding: '8px' }}>Invoice</th>
-                        <th style={{ padding: '8px', textAlign: 'right' }}>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {qtyPerInvoice.map((row, index) => (
-                        <tr key={index} style={{ borderBottom: '1px solid #eee' }}>
-                            <td style={{ padding: '8px' }}>{row['Customer ID']}</td>
-                            <td style={{ padding: '8px' }}>{row.Invoice}</td>
-                            <td style={{ padding: '8px', textAlign: 'right' }}>{row.Quantity.toLocaleString()}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    )
+  return (
+    <section className="panel orders-panel" aria-labelledby="orders-title">
+      <div className="panel-header"><div><h2 id="orders-title">Largest single orders</h2><p className="panel-description">The 10 largest invoices by quantity ordered.</p></div><span className="unit-label">Units</span></div>
+      <div className="table-scroll" role="region" aria-label="Largest orders" tabIndex="0">
+        <table className="orders-table">
+          <caption className="sr-only">Top 10 largest single orders by quantity</caption>
+          <thead><tr><th scope="col">Customer ID</th><th scope="col">Invoice</th><th scope="col" className="numeric">Quantity</th></tr></thead>
+          <tbody>
+            {qtyPerInvoice.map(row => (
+              <tr key={row.Invoice}><th scope="row">{row['Customer ID']}</th><td><span className="invoice-number">#{row.Invoice}</span></td><td className="numeric">{formatNumber(row.Quantity)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="panel-footnote">Large quantities highlight bulk-purchasing behavior.</p>
+    </section>
+  )
 }
 
 export default TopInvoicesTable

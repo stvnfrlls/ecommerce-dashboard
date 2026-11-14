@@ -1,22 +1,17 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import topProducts from '../data/top_products.json'
+import RankedList from './RankedList'
+import { formatCurrency, formatProductName } from '../utils/format'
 
 function TopProductsChart() {
-    return (
-        <div className="chart-card">
-            <h2>Top 10 Best-Selling Products by Revenue</h2>
-            <p className="chart-caption">Products ranked by total revenue, excluding non-product line items like postage.</p>
-            <ResponsiveContainer width="100%" height={500}>
-                <BarChart data={topProducts} layout="vertical" margin={{ left: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" tickFormatter={(value) => value.toLocaleString()} />
-                    <YAxis type="category" dataKey="Product" width={220} />
-                    <Tooltip formatter={(value) => value.toLocaleString()} />
-                    <Bar dataKey="Revenue" fill="#3b82f6" />
-                </BarChart>
-            </ResponsiveContainer>
-        </div>
-    )
+  const rows = topProducts.map(row => ({ label: formatProductName(row.Product), value: row.Revenue, formattedValue: formatCurrency(row.Revenue) }))
+
+  return (
+    <section className="panel" aria-labelledby="products-title">
+      <div className="panel-header"><div><h2 id="products-title">Best-selling products</h2><p className="panel-description">The top 10 products, ranked by revenue.</p></div><span className="unit-label">GBP</span></div>
+      <RankedList rows={rows} valueLabel="Top products by revenue in pounds" />
+      <p className="panel-footnote">Non-product items, including postage, are excluded.</p>
+    </section>
+  )
 }
 
 export default TopProductsChart

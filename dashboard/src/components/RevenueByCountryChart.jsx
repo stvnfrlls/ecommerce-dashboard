@@ -1,36 +1,27 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { useState } from 'react'
 import revenueByCountry from '../data/revenue_by_country.json'
+import RankedList from './RankedList'
+import { formatCurrency } from '../utils/format'
 
 function RevenueByCountryChart() {
-    const withoutUK = revenueByCountry.filter(row => row.Country !== 'United Kingdom')
+  const [includeUK, setIncludeUK] = useState(false)
+  const countries = includeUK ? revenueByCountry : revenueByCountry.filter(row => row.Country !== 'United Kingdom')
+  const rows = countries.map(row => ({ label: row.Country, value: row.Revenue, formattedValue: formatCurrency(row.Revenue) }))
 
-    return (
-        <div className="chart-card">
-            <h2>Revenue by Country (Top 10)</h2>
-            <p className="chart-caption">Revenue concentration by country, led heavily by the UK home market.</p>
-            <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={revenueByCountry} layout="vertical" margin={{ left: 50 }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" tickFormatter={(value) => value.toLocaleString()} />
-                    <YAxis type="category" dataKey="Country" width={100} />
-                    <Tooltip formatter={(value) => value.toLocaleString()} />
-                    <Bar dataKey="Revenue" fill="#3b82f6" />
-                </BarChart>
-            </ResponsiveContainer>
-
-            <h2>Revenue by Country (Excluding UK)</h2>
-            <p className="chart-caption">Same data with the UK removed, to surface the next-largest international markets.</p>
-            <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={withoutUK} layout="vertical" margin={{ left: 50 }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" tickFormatter={(value) => value.toLocaleString()} />
-                    <YAxis type="category" dataKey="Country" width={100} />
-                    <Tooltip formatter={(value) => value.toLocaleString()} />
-                    <Bar dataKey="Revenue" fill="#f97316" />
-                </BarChart>
-            </ResponsiveContainer>
+  return (
+    <section className="panel markets-panel" aria-labelledby="markets-title">
+      <div className="panel-header"><div><h2 id="markets-title">Revenue by country</h2><p className="panel-description">Explore the home market and sales abroad.</p></div><span className="unit-label">GBP</span></div>
+      <div className="market-toolbar">
+        <div className="segmented-control" role="group" aria-label="Country view">
+          <button type="button" aria-pressed={!includeUK} onClick={() => setIncludeUK(false)}>International</button>
+          <button type="button" aria-pressed={includeUK} onClick={() => setIncludeUK(true)}>Including UK</button>
         </div>
-    )
+        <span className="market-count" aria-live="polite">{countries.length} markets</span>
+      </div>
+      <RankedList rows={rows} valueLabel={includeUK ? 'Top 10 countries by revenue in pounds' : 'Top international countries by revenue in pounds'} />
+      <p className="panel-footnote">Country export totals span a different period from the 2010 summary.</p>
+    </section>
+  )
 }
 
 export default RevenueByCountryChart

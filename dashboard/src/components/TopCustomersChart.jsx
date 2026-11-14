@@ -1,22 +1,17 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import topCustomers from '../data/top_customers.json'
+import RankedList from './RankedList'
+import { formatNumber } from '../utils/format'
 
 function TopCustomersChart() {
-    return (
-        <div className="chart-card">
-            <h2>Top 10 Customers by Quantity Purchased</h2>
-            <p className="chart-caption">The customers who purchased the highest total quantity of items in 2010.</p>
-            <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={topCustomers} layout="vertical" margin={{ left: 80 }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" tickFormatter={(value) => value.toLocaleString()} />
-                    <YAxis type="category" dataKey="Customer ID" width={80} />
-                    <Tooltip formatter={(value) => value.toLocaleString()} />
-                    <Bar dataKey="Quantity" fill="#10b981" />
-                </BarChart>
-            </ResponsiveContainer>
-        </div>
-    )
+  const rows = topCustomers.map(row => ({ label: `Customer ${row['Customer ID']}`, value: row.Quantity, formattedValue: formatNumber(row.Quantity) }))
+
+  return (
+    <section className="panel customers-panel" aria-labelledby="customers-title">
+      <div className="panel-header"><div><h2 id="customers-title">Highest-volume customers</h2><p className="panel-description">The top 10 customers by quantity purchased in 2010.</p></div><span className="unit-label">Units</span></div>
+      <RankedList rows={rows} valueLabel="Top customers by units purchased" />
+      <p className="panel-footnote">Customers are identified by their original customer ID.</p>
+    </section>
+  )
 }
 
 export default TopCustomersChart
